@@ -5,6 +5,9 @@ Defines utility functions for the ``twistedfcp`` module.
 import logging
 from twisted.protocols.basic import LineReceiver
 
+class MalformedMessageException(Exception):
+    pass
+
 class MessageBasedProtocol(LineReceiver):
     """
     Defines a protocol that parses freenet-style messages. These messages take
