@@ -72,10 +72,9 @@ class MessageBasedProtocol(LineReceiver):
                 self.dataCount = 0
                 self.setRawMode()
         else:
-            kv = line.split('=')
-            if len(kv) != 2:
-                text = 'Bad line encountered: "{0}" (expected "key=value")'
-                raise MalformedMessageException(text.format(line))
+            # The value could contain '='. Only the first in a line delimits
+            # the key and value.
+            kv = line.split('=', 1)
             self.message.update([kv])
 
     def rawDataReceived(self, data):
